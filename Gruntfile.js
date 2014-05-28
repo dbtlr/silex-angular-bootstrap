@@ -25,6 +25,26 @@ module.exports = function(grunt) {
       }
     },
 
+    php: {
+        dist: {
+            options: {
+                port: 5000,
+                base: 'web',
+                router: 'index.php',
+                keepalive: true,
+            }
+        },
+    },
+
+    concurrent: {
+      server: {
+      tasks: ['php', 'watch'],
+        options: {
+            logConcurrentOutput: true
+        } 
+      }
+    },
+
     copy: {
       main: {
         files: [
@@ -45,7 +65,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-php');
 
+  grunt.registerTask('server', ['concurrent:server']);
   grunt.registerTask('build', ['sass', 'copy']);
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['server']);
 }

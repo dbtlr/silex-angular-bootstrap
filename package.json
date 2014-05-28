@@ -9,6 +9,7 @@
     "grunt-concurrent": "*"
   },
   "devDependencies": {
-    "grunt-contrib-watch": "~0.5.3"
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-php": "~0.3.3"
   }
 }
