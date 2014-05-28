@@ -11,7 +11,7 @@ module.exports = function(grunt) {
           outputStyle: 'compressed'
         },
         files: {
-          'web/css/app.css': 'frontend/scss/app.scss'
+          'web/css/app.css': 'assets/scss/app.scss'
         }        
       }
     },
@@ -20,17 +20,17 @@ module.exports = function(grunt) {
       grunt: { files: ['Gruntfile.js'] },
 
       sass: {
-        files: 'frontend/scss/**/*.scss',
+        files: 'assets/scss/**/*.scss',
         tasks: ['sass']
       },
 
       js: {
-        files: 'frontend/js/**/*.js',
+        files: 'assets/js/**/*.js',
         tasks: ['concat']
       },
 
       templates: {
-        files: 'frontend/templates/**/*.html',
+        files: 'assets/templates/**/*.html',
         tasks: ['copy']
       }
     },
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 
     concat: {
       dist: {
-        src: ['frontend/js/app/**/*.js'],
+        src: ['assets/js/app/**/*.js'],
         dest: 'web/js/app.js',
       },
     },
@@ -65,15 +65,12 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          {expand: true, flatten: true, src: ['bower_components/fontawesome/fonts/**'], dest: 'web/fonts', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/angular/**'], dest: 'web/js/libs/angular', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/angular-resource/**'], dest: 'web/js/libs/angular', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/angular-route/**'], dest: 'web/js/libs/angular', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/angular-animate/**'], dest: 'web/js/libs/angular', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/requirejs/require.js'], dest: 'web/js/libs', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/**'], dest: 'web/js/libs/bootstrap', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/**'], dest: 'web/fonts/bootstrap', filter: 'isFile'},
-          {expand: true, cwd: 'frontend/templates/', src: ['**'], dest: 'web/templates', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/fontawesome/fonts/**'], dest: 'web/fonts', filter: 'isFile'},
+          {expand: true, cwd: 'assets/templates/', src: ['**'], dest: 'web/templates', filter: 'isFile'},
         ]
       }
     }
@@ -87,6 +84,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('server', ['concurrent:server']);
-  grunt.registerTask('build', ['sass', 'copy', 'concat']);
+  grunt.registerTask('build', ['copy', 'sass', 'concat']);
   grunt.registerTask('default', ['server']);
 }

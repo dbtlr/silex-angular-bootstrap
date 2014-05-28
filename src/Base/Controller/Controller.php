@@ -6,7 +6,15 @@ use Base\Application;
 
 abstract class Controller
 {
+    /**
+     * @var Application
+     */
     protected $app;
+
+    /**
+     * @var string
+     */
+    protected $tplPath;
 
     /**
      * Set the application class to the controller.
@@ -28,18 +36,6 @@ abstract class Controller
      */
     protected function render($tpl, $values = array(), $request = null)
     {
-        preg_match('/^(.*)Controller$/', get_class($this), $matches);
-
-        $pieces  = explode('\\', $matches[1]);
-        $pieces  = array_filter(
-            $pieces,
-            function ($piece) {
-                return $piece != 'Controller';
-            }
-        );
-
-        $tplPath = implode('/', $pieces);
-
-        return $this->app->render($tplPath . '/' . $tpl . '.twig', $values, $request);
+        return $this->app->render($this->tplPath . '/' . $tpl . '.html.twig', $values, $request);
     }
 }
