@@ -1,0 +1,14 @@
+{
+  "name": "address-book",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-sass": "~0.10.0",
+    "grunt-contrib-copy": "*",
+    "grunt-concurrent": "*"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.5.3"
+  }
+}
