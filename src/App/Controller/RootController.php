@@ -7,7 +7,7 @@ use Base\Controller\Controller;
 class RootController extends Controller
 {
     /**
-     * 
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
