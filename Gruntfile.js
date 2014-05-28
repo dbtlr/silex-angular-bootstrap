@@ -85,5 +85,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('server', ['concurrent:server']);
   grunt.registerTask('build', ['copy', 'sass', 'concat']);
-  grunt.registerTask('default', ['server']);
+  grunt.registerTask('default', ['build', 'server']);
 }
