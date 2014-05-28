@@ -1,5 +1,7 @@
 .DS_Store
 vendor/
-web/components/
+web/css/
+web/fonts/
+web/js/
 bower_components/
 node_modules/

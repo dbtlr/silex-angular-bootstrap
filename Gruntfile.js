@@ -4,14 +4,14 @@ module.exports = function(grunt) {
 
     sass: {
       options: {
-        includePaths: ['bower_components/bootstrap-sass-official/vendor/assets/stylesheets']
+        includePaths: ['bower_components/bootstrap-sass-official/vendor/assets/stylesheets', 'bower_components/fontawesome/scss']
       },
       dist: {
         options: {
           outputStyle: 'compressed'
         },
         files: {
-          'css/app.css': 'scss/app.scss'
+          'web/css/app.css': 'frontend/scss/app.scss'
         }        
       }
     },
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
       grunt: { files: ['Gruntfile.js'] },
 
       sass: {
-        files: 'scss/**/*.scss',
+        files: 'frontend/scss/**/*.scss',
         tasks: ['sass']
       }
     },
@@ -28,10 +28,14 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          // includes files within path
-          {expand: true, flatten: true, src: ['bower_components/jquery/jquery.min.js'], dest: 'js/libs', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/modernizr/modernizr.js'], dest: 'js/libs', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/foundation/js/foundation.min.js'], dest: 'js/libs', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/fontawesome/fonts/**'], dest: 'web/fonts', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/angular/angular.min.js'], dest: 'web/js/libs', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/angular-resource/angular-resource.min.js'], dest: 'web/js/libs', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/angular-route/angular-route.min.js'], dest: 'web/js/libs', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/angular-animate/angular-animate.min.js'], dest: 'web/js/libs', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/**'], dest: 'web/js/libs/bootstrap', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/**'], dest: 'web/fonts/bootstrap', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['frontend/js/**'], dest: 'web/js', filter: 'isFile'},
         ]
       }
     }
@@ -40,9 +44,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-concurrent');
 
   grunt.registerTask('build', ['sass', 'copy', 'jekyll:build']);
   grunt.registerTask('default', ['jekyll:server','watch']);
   grunt.registerTask('server', ['build', 'concurrent']);
+}
