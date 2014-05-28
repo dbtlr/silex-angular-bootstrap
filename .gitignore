@@ -3,5 +3,6 @@ vendor/
 web/css/
 web/fonts/
 web/js/
+web/templates/
 bower_components/
 node_modules/

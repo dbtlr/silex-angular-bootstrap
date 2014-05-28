@@ -22,6 +22,16 @@ module.exports = function(grunt) {
       sass: {
         files: 'frontend/scss/**/*.scss',
         tasks: ['sass']
+      },
+
+      js: {
+        files: 'frontend/js/**/*.js',
+        tasks: ['copy']
+      },
+
+      templates: {
+        files: 'frontend/templates/**/*.html',
+        tasks: ['copy']
       }
     },
 
@@ -49,13 +59,15 @@ module.exports = function(grunt) {
       main: {
         files: [
           {expand: true, flatten: true, src: ['bower_components/fontawesome/fonts/**'], dest: 'web/fonts', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/angular/angular.min.js'], dest: 'web/js/libs', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/angular-resource/angular-resource.min.js'], dest: 'web/js/libs', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/angular-route/angular-route.min.js'], dest: 'web/js/libs', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['bower_components/angular-animate/angular-animate.min.js'], dest: 'web/js/libs', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/angular/**'], dest: 'web/js/libs/angular', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/angular-resource/**'], dest: 'web/js/libs/angular', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/angular-route/**'], dest: 'web/js/libs/angular', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/angular-animate/**'], dest: 'web/js/libs/angular', filter: 'isFile'},
+          {expand: true, flatten: true, src: ['bower_components/requirejs/require.js'], dest: 'web/js/libs', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/**'], dest: 'web/js/libs/bootstrap', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/**'], dest: 'web/fonts/bootstrap', filter: 'isFile'},
-          {expand: true, flatten: true, src: ['frontend/js/**'], dest: 'web/js', filter: 'isFile'},
+          {expand: true, cwd: 'frontend/js/', src: ['**'], dest: 'web/js', filter: 'isFile'},
+          {expand: true, cwd: 'frontend/templates/', src: ['**'], dest: 'web/templates', filter: 'isFile'},
         ]
       }
     }
