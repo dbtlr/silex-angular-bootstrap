@@ -11,8 +11,14 @@ use Silex\Provider\TwigServiceProvider;
 
 class Application extends SilexApplication
 {
+    /** Load the Twig traits */
     use SilexApplication\TwigTrait;
 
+    /**
+     * Start the application
+     *
+     * @param string $viewPath
+     */
     public function start($viewPath)
     {
         $app = $this;
@@ -22,15 +28,21 @@ class Application extends SilexApplication
             }
         );
 
-        $this->register(new TwigServiceProvider(), array( 'twig.path' => $viewPath ));
+        $this->register(new TwigServiceProvider(), array('twig.path' => $viewPath));
         $this->createErrorHandler();
     }
 
+    /**
+     * Load this application into the router.
+     */
     public function addRouter(RouterInterface $router)
     {
         $router->load($this);
     }
 
+    /**
+     * Set the error handler for showing error pages.
+     */
     protected function createErrorHandler()
     {
         $app = $this;
@@ -42,10 +54,10 @@ class Application extends SilexApplication
 
                 switch ($code) {
                     case 404:
-                        $message = 'The requested page could not be found.';
+                        $message = '<h1>The requested page could not be found.</h1>';
                         break;
                     default:
-                        $message = 'We are sorry, but something went terribly wrong.';
+                        $message = '<h1>We are sorry, but something went terribly wrong.</h1>';
                         $message .= '<p>' . $e->getMessage() . '</p>';
                         $message .= '<pre>' . $app->backtrace($e->getTrace()) . '</pre>';
                 }

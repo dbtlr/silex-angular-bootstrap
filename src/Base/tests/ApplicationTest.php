@@ -2,6 +2,7 @@
 namespace Base;
 
 use Base\Router\RouterInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,10 +36,11 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     public function testWillRegisterErrorHandler()
     {
         $app = new Application();
+        $app->boot();
         $dispatcher = $app['dispatcher'];
-        $startCount = count($dispatcher->getListeners('kernel.exception'));
+        $startCount = count($dispatcher->getListeners(KernelEvents::EXCEPTION));
         $app->start(__DIR__);
-        $endCount = count($dispatcher->getListeners('kernel.exception'));
+        $endCount = count($dispatcher->getListeners(KernelEvents::EXCEPTION));
 
         // We should have gained one more exception listener.
         $this->assertEquals($startCount + 1, $endCount);

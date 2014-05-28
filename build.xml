@@ -23,12 +23,12 @@ phpcs - Detects standard violations on the code.
   </target>
 
   <target name="test">
-    <exec executable="phpunit" failonerror="true">
+    <exec executable="phpunit">
     </exec>
   </target>
 
   <target name="phpcs">
-    <exec executable="./vendor/bin/phpcs" failonerror="true">
+    <exec executable="./vendor/bin/phpcs">
       <arg value="--standard=PSR2" />
       <arg value="--ignore=**/tests/*" />
       <arg path="src" />
