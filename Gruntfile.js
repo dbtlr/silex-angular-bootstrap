@@ -46,7 +46,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-concurrent');
 
-  grunt.registerTask('build', ['sass', 'copy', 'jekyll:build']);
-  grunt.registerTask('default', ['jekyll:server','watch']);
-  grunt.registerTask('server', ['build', 'concurrent']);
+  grunt.registerTask('build', ['sass', 'copy']);
+  grunt.registerTask('default', ['watch']);
 }
