@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 
       js: {
         files: 'frontend/js/**/*.js',
-        tasks: ['copy']
+        tasks: ['concat']
       },
 
       templates: {
@@ -55,6 +55,13 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      dist: {
+        src: ['frontend/js/app/**/*.js'],
+        dest: 'web/js/app.js',
+      },
+    },
+
     copy: {
       main: {
         files: [
@@ -66,7 +73,6 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ['bower_components/requirejs/require.js'], dest: 'web/js/libs', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/**'], dest: 'web/js/libs/bootstrap', filter: 'isFile'},
           {expand: true, flatten: true, src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/**'], dest: 'web/fonts/bootstrap', filter: 'isFile'},
-          {expand: true, cwd: 'frontend/js/', src: ['**'], dest: 'web/js', filter: 'isFile'},
           {expand: true, cwd: 'frontend/templates/', src: ['**'], dest: 'web/templates', filter: 'isFile'},
         ]
       }
@@ -78,8 +84,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-php');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('server', ['concurrent:server']);
-  grunt.registerTask('build', ['sass', 'copy']);
+  grunt.registerTask('build', ['sass', 'copy', 'concat']);
   grunt.registerTask('default', ['server']);
 }

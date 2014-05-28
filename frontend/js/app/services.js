@@ -1,5 +1,3 @@
-define(['angular'], function (angular) {
-	'use strict';
+'use strict';
 
-	angular.module('myApp.services', []);
-});
+angular.module('myApp.services', []);
